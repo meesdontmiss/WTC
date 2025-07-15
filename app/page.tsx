@@ -250,7 +250,7 @@ export default function Component() {
             <a href="https://x.com/WalmartToyCoin" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
               <FaTwitter />
             </a>
-            <a href="https://dexscreener.com/" target="_blank" rel="noopener noreferrer" aria-label="Dexscreener">
+            <a href="https://dexscreener.com/abstract/0x67ec95320d5388662bbb55b430ed4aaa755c15dd" target="_blank" rel="noopener noreferrer" aria-label="Dexscreener">
               <Image src="/dexscreenr.png" alt="Dexscreener" width={36} height={36} className="object-contain" />
             </a>
             <a href="https://x.com/i/communities/1943879118862319830" target="_blank" rel="noopener noreferrer" aria-label="X Community">
