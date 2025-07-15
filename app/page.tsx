@@ -84,10 +84,22 @@ export default function Component() {
   // const [planeVisible, setPlaneVisible] = useState(true)
   const [planeKey, setPlaneKey] = useState(0)
   const [mounted, setMounted] = useState(false)
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const [isMuted, setIsMuted] = useState(false);
+  const [volume, setVolume] = useState(0.5);
 
   useEffect(() => {
     setMounted(true)
   }, [])
+
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.volume = volume;
+      audioRef.current.muted = isMuted;
+      if (!audioRef.current.paused) return;
+      audioRef.current.play().catch(() => {});
+    }
+  }, [isMuted, volume]);
 
   // Remove useEffect for planeVisible
 
@@ -136,6 +148,41 @@ export default function Component() {
 
   return (
     <div className="min-h-screen bg-[url('/walmart-toy-coin.png')] bg-cover bg-center bg-no-repeat flex items-center justify-center p-6 relative overflow-visible">
+      {/* Auto-playing looping audio */}
+      <audio ref={audioRef} src="/happy flippers - never stop.mp3" autoPlay loop hidden />
+      {/* Audio controls */}
+      <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 flex items-center gap-4 bg-black/60 rounded-full px-4 py-2 shadow-lg backdrop-blur-md">
+        <button
+          onClick={() => setIsMuted((m) => !m)}
+          className="text-white text-lg focus:outline-none"
+          aria-label={isMuted ? 'Unmute' : 'Mute'}
+        >
+          {isMuted ? (
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 9l6 6m0-6l-6 6" />
+              <path strokeLinecap="round" strokeLinejoin="round" d="M3 9v6h4l5 5V4L7 9H3z" />
+            </svg>
+          ) : (
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M3 9v6h4l5 5V4L7 9H3z" />
+            </svg>
+          )}
+        </button>
+        <input
+          type="range"
+          min={0}
+          max={1}
+          step={0.01}
+          value={isMuted ? 0 : volume}
+          onChange={e => {
+            setVolume(Number(e.target.value));
+            if (Number(e.target.value) === 0) setIsMuted(true);
+            else setIsMuted(false);
+          }}
+          className="w-24 accent-blue-400"
+          aria-label="Volume"
+        />
+      </div>
       {/* Raining toys background */}
       {mounted && <ToyRain />}
       <div className="absolute inset-0 backdrop-blur-sm"></div>
