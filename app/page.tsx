@@ -139,56 +139,66 @@ export default function Component() {
       {/* Raining toys background */}
       {mounted && <ToyRain />}
       <div className="absolute inset-0 backdrop-blur-sm"></div>
+      {/* Penguin in bottom-left (desktop only) */}
+      <a href="https://www.walmart.com/browse/0?facet=brand:Pudgy+Penguins" target="_blank" rel="noopener noreferrer" className="hidden md:block absolute bottom-12 left-12 z-20">
+        <button className="transition-all duration-300 hover:scale-125 hover:drop-shadow-[0_0_40px_rgba(255,255,255,0.8)] focus:outline-none">
+          <Image src="/pengu.png" alt="Penguin" width={320} height={320} className="rounded-full w-[320px]" />
+        </button>
+      </a>
+      {/* Whale in bottom-right (desktop only) */}
+      <a href="https://finance.yahoo.com/news/walmart-toy-coin-outpaces-bitcoin-010959573.html" target="_blank" rel="noopener noreferrer" className="hidden md:block absolute bottom-14 right-14 z-20">
+        <button className="transition-all duration-300 hover:scale-125 hover:drop-shadow-[0_0_40px_rgba(255,255,255,0.8)] focus:outline-none select-none">
+          <Image src="/whale.png" alt="Whale" width={320} height={320} className="rounded-full w-[320px]" />
+        </button>
+      </a>
       {/* Main content */}
-      <div className="relative z-10 text-center max-w-2xl mx-auto w-full flex flex-col items-center">
+      <div className="relative z-10 text-center max-w-2xl mx-auto w-full flex flex-col justify-start -mt-8" style={{minHeight: '60vh'}}>
         {/* Logo/Brand */}
         <div className="flex justify-center items-center mb-4">
           <div className="w-96 h-96 flex items-center justify-center">
             <Image src="/WTC.png" alt="WTC Logo" width={384} height={384} className="object-contain" />
           </div>
         </div>
-        {/* Tagline and Contract Address moved up */}
-        <div className="flex flex-col items-center w-full">
-          <div className="flex justify-center items-center mb-2 mt-2">
+        {/* Tagline and Contract Address */}
+        <div className="flex flex-col items-center gap-2 mb-4 mt-2">
+          <div className="flex justify-center items-center">
             <span className="text-3xl font-bold text-white rounded-full font-sans" style={{letterSpacing: '0.02em'}}>
               Walmart Toy Coin
             </span>
             <Image src="/abstract.png" alt="Abstract Logo" width={48} height={48} className="ml-3 inline-block align-middle" />
           </div>
-          <div className="mb-4">
-            <button
-              onClick={copyToClipboard}
-              className="group bg-white/30 backdrop-blur-sm border border-white/40 rounded-full px-6 py-3 flex items-center space-x-3 mx-auto hover:bg-white/40 transition-all duration-200 shadow-lg hover:shadow-xl"
-            >
-              <span className="text-sm font-mono text-white truncate max-w-[200px] sm:max-w-none">
-                {contractAddress}
-              </span>
-              <div className="flex-shrink-0">
-                {copied ? (
-                  <Check className="w-4 h-4 text-white" />
-                ) : (
-                  <Copy className="w-4 h-4 text-white group-hover:text-white transition-colors" />
-                )}
-              </div>
-            </button>
-            {copied && <p className="text-sm text-white mt-2 font-medium">Contract address copied!</p>}
-          </div>
-          {/* Penguin and Whale toys centered under contract */}
-          <div className="flex flex-col items-center gap-4 md:flex-row md:justify-center md:gap-12 mt-2 mb-6">
-            <a href="https://www.walmart.com/browse/0?facet=brand:Pudgy+Penguins" target="_blank" rel="noopener noreferrer">
-              <button className="transition-all duration-300 hover:scale-125 hover:drop-shadow-[0_0_40px_rgba(255,255,255,0.8)] focus:outline-none">
-                <Image src="/pengu.png" alt="Penguin" width={320} height={320} className="rounded-full w-20 md:w-[160px]" />
-              </button>
-            </a>
-            <a href="https://finance.yahoo.com/news/walmart-toy-coin-outpaces-bitcoin-010959573.html" target="_blank" rel="noopener noreferrer">
-              <button className="transition-all duration-300 hover:scale-125 hover:drop-shadow-[0_0_40px_rgba(255,255,255,0.8)] focus:outline-none select-none">
-                <Image src="/whale.png" alt="Whale" width={320} height={320} className="rounded-full w-20 md:w-[160px]" />
-              </button>
-            </a>
-          </div>
+          <button
+            onClick={copyToClipboard}
+            className="group bg-white/30 backdrop-blur-sm border border-white/40 rounded-full px-6 py-3 flex items-center space-x-3 mx-auto hover:bg-white/40 transition-all duration-200 shadow-lg hover:shadow-xl"
+          >
+            <span className="text-sm font-mono text-white truncate max-w-[200px] sm:max-w-none">
+              {contractAddress}
+            </span>
+            <div className="flex-shrink-0">
+              {copied ? (
+                <Check className="w-4 h-4 text-white" />
+              ) : (
+                <Copy className="w-4 h-4 text-white group-hover:text-white transition-colors" />
+              )}
+            </div>
+          </button>
+          {copied && <p className="text-sm text-white mt-2 font-medium">Contract address copied!</p>}
         </div>
-        {/* Social Icons - add more margin above for separation */}
-        <div className="mt-24 pt-8 border-t border-white/30">
+        {/* Toys Row - mobile only */}
+        <div className="flex justify-center items-end gap-8 mb-4 md:hidden">
+          <a href="https://www.walmart.com/browse/0?facet=brand:Pudgy+Penguins" target="_blank" rel="noopener noreferrer">
+            <button className="transition-all duration-300 hover:scale-125 hover:drop-shadow-[0_0_40px_rgba(255,255,255,0.8)] focus:outline-none">
+              <Image src="/pengu.png" alt="Penguin" width={320} height={320} className="rounded-full w-20" />
+            </button>
+          </a>
+          <a href="https://finance.yahoo.com/news/walmart-toy-coin-outpaces-bitcoin-010959573.html" target="_blank" rel="noopener noreferrer">
+            <button className="transition-all duration-300 hover:scale-125 hover:drop-shadow-[0_0_40px_rgba(255,255,255,0.8)] focus:outline-none select-none">
+              <Image src="/whale.png" alt="Whale" width={320} height={320} className="rounded-full w-20" />
+            </button>
+          </a>
+        </div>
+        {/* Social Icons with extra margin above and break line */}
+        <div className="mt-0 pt-3 border-t border-white/30">
           <div className="flex justify-center items-center space-x-12 text-3xl text-white">
             <a href="https://x.com/WalmartToyCoin" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
               <FaTwitter />
